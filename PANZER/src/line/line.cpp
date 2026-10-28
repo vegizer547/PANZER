@@ -1,8 +1,8 @@
-#include <line.h>
+#include "line.h"
 
 void ReadRawLine()
 {
-    for (int a = 0; a < 8 a++)
+    for (int a = 0; a < 8; a++)
     {
         for (int i = 0; i <= 3; i++)
             digitalWrite(0 + i, bitRead(a, i));
@@ -29,9 +29,9 @@ void AutoCalib()
     Serial.println("Дописать когда будут готовы моторы");
 }
 
-void CalibrateLine()
+void ReadCalibratedValue()
 {
-    ReadRawValue();
+    ReadRawLine();
     for (int i = 0; i < 8; i++)
     {
         line[i].calib = map(line[i].raw, line[i].min, line[i].max, 0, 1000);
@@ -51,7 +51,7 @@ uint16_t Line()
 
     for (uint8_t i = 0; i < 4; i++)
     {
-        uint16_t value = calibrated_line[i + 2];
+        uint16_t value = line[i+2].calib;
         if (value > 800)
             onLine = true;
         if (value > 400)

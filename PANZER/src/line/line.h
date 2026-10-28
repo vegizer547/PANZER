@@ -1,5 +1,5 @@
 #pragma once
-#include <src/config.h>
+#include "../config.h"
 
 void ReadRawLine();
 void CalibrateLine();

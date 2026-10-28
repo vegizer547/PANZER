@@ -1,7 +1,9 @@
 #pragma once
 #include <Arduino.h>
+#include <GyverPID.h>
+#include <Wire.h>
 
-#define CONTAKT_PIN 
+#define CONTAKT_PIN -1
 
 #define PWMA 14
 #define PWMB 8
@@ -26,7 +28,7 @@ struct line_data {
     int min = 1024;
     int max = 0;
     bool state = 0;
-}
+};
 
 inline line_data line[8];
 

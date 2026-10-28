@@ -1,4 +1,5 @@
-#include <config.h>
+#include "config.h"
+#include "line/line.h"
 
 GyverPID regulator(0.5, 0, 0, 2); // настроить 
 GyverPID motors(5, 0, 0.2, 10);
@@ -35,6 +36,8 @@ void setup()
 
   motors.setDirection(NORMAL);
   motors.setLimits(-255, 255);
+  
+  
 }
 
 void loop()
