@@ -22,6 +22,9 @@
 #define BUT 21
 #define NINETY 35
 
+//                              диаметр  кол.прорезей
+const float DIST_PER_TICK = (PI * 30.) / (24. * 2.); 
+
 struct line_data {
     int raw;
     int calib;
@@ -30,9 +33,6 @@ struct line_data {
     bool state = 0;
 };
 
-inline line_data line[8];
-
 inline int speed = 26; //Скорость в процентах
 inline int motor_sp = map(speed, 0, 100, 0, 255); // при sp = 26: msp = 66
-
-
+inline line_data line[8];

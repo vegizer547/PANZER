@@ -1,5 +1,7 @@
 #include "config.h"
 #include "line/line.h"
+#include "motors/motors.h"
+#include "motors/encoders/encoders.h"
 
 GyverPID regulator(0.5, 0, 0, 2); // настроить 
 GyverPID motors(5, 0, 0.2, 10);
