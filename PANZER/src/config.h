@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <GyverPID.h>
 #include <Wire.h>
+#include "Adafruit_TCS34725.h"
 
 #define CONTAKT_PIN -1
 
@@ -22,16 +23,21 @@
 #define BUT 21
 #define NINETY 35
 
+#define KOLEYA 105
+
+
 //                              диаметр  кол.прорезей
-const float DIST_PER_TICK = (PI * 30.) / (24. * 2.); 
+const float DIST_PER_TICK = (PI * 55.3) / (24. * 2.); 
 
 inline bool is_drive = 1;
-
-#define KOLEYA 130
 
 inline GyverPID regulator(0.5, 0, 0, 2); // настроить 
 inline GyverPID motors(5, 0, 0.2, 10);
 
+inline Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_2_4MS, TCS34725_GAIN_4X);
+inline Adafruit_TCS34725 tcs2 = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_2_4MS, TCS34725_GAIN_4X);
+
 inline int speed = 26; //Скорость в процентах
 inline int motor_sp = map(speed, 0, 100, 0, 255); // при sp = 26: msp = 66
+
 
