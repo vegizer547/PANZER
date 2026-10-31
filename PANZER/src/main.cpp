@@ -3,9 +3,6 @@
 #include "motors/motors.h"
 #include "motors/encoders/encoders.h"
 
-GyverPID regulator(0.5, 0, 0, 2); // настроить 
-GyverPID motors(5, 0, 0.2, 10);
-
 void setup()
 {
   Serial.begin(9600);
@@ -39,15 +36,20 @@ void setup()
   motors.setDirection(NORMAL);
   motors.setLimits(-255, 255);
   
-  
+  attachInterrupt(digitalPinToInterrupt(ENC_PIN0), l_InterruptHandler, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ENC_PIN1), r_InterruptHandler, CHANGE);
+
+
 }
 
 void loop()
 {
-  digitalWrite(STBY, 1);
+    digitalWrite(STBY, 1);
     uint16_t position = Line();
     regulator.input = position;
     int out = regulator.getResultTimer();
-    //ml(constrain(motor_sp - out, -255, 255));
-    //mr(constrain(motor_sp + out, -255, 255));
+    ml(constrain(motor_sp - out, -255, 255));
+    mr(constrain(motor_sp + out, -255, 255));
+
+
 }

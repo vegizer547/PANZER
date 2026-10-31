@@ -25,6 +25,11 @@
 //                              диаметр  кол.прорезей
 const float DIST_PER_TICK = (PI * 30.) / (24. * 2.); 
 
+#define KOLEYA 130
+
+inline GyverPID regulator(0.5, 0, 0, 2); // настроить 
+inline GyverPID motors(5, 0, 0.2, 10);
+
 struct line_data {
     int raw;
     int calib;
