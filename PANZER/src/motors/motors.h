@@ -1,4 +1,5 @@
 #include "../config.h"
+#include "../sensor/encoders/encoders.h"
 
 void ml(int s);
 void mr(int s);

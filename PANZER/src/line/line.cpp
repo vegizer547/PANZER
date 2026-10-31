@@ -1,5 +1,7 @@
 #include "line.h"
 
+static line_data line[8];
+
 void ReadRawLine()
 {
     for (int a = 0; a < 8; a++)
@@ -42,7 +44,7 @@ void ReadCalibratedValue()
 }
 
 static uint16_t lastPosition = 2500;
-uint16_t Line()
+uint16_t GetLinePos()
 {
     ReadCalibratedValue();
     bool onLine = false;
@@ -64,4 +66,18 @@ uint16_t Line()
         return lastPosition;
     lastPosition = avg / sum;
     return lastPosition;
+}
+
+void goLine()
+{
+    digitalWrite(STBY, is_drive);
+    uint16_t position = GetLinePos();
+    regulator.input = position;
+    int out = regulator.getResultTimer();
+    ml(constrain(motor_sp - out, -255, 255));
+    mr(constrain(motor_sp + out, -255, 255));
+    if (line[1].state == 1 || line[6].state == 1)
+    {
+        //опросить датчики цвета
+    }
 }

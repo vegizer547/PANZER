@@ -1,5 +1,4 @@
-#include "../config.h"
-#include "encoders/encoders.h"
+#include "motors.h"
 
 void ml(int s)
 {
@@ -38,7 +37,7 @@ void mr(int s)
 
 void foraward(uint64_t r)
 {
-    digitalWrite(STBY, 1);
+    digitalWrite(STBY, is_drive);
     double start_l = getRasst(0);
     double start_r = getRasst(1);
 
@@ -64,7 +63,7 @@ void foraward(uint64_t r)
 
 void backward(uint64_t r)
 {
-    digitalWrite(STBY, 1);
+    digitalWrite(STBY, is_drive);
     double start_l = getRasst(0);
     double start_r = getRasst(1);
 
@@ -90,7 +89,7 @@ void backward(uint64_t r)
 
 void right(int angle)
 {
-    digitalWrite(STBY, 1);
+    digitalWrite(STBY, is_drive);
     double start_l = getRasst(0);
     double start_r = getRasst(1);
 
@@ -125,7 +124,7 @@ void right(int angle)
 
 void left(int angle)
 {
-    digitalWrite(STBY, 1);
+    digitalWrite(STBY, is_drive);
     double start_l = getRasst(0);
     double start_r = getRasst(1);
 

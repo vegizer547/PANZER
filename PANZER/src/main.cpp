@@ -1,7 +1,7 @@
 #include "config.h"
 #include "line/line.h"
 #include "motors/motors.h"
-#include "motors/encoders/encoders.h"
+#include "sensor/encoders/encoders.h"
 
 void setup()
 {
@@ -44,12 +44,5 @@ void setup()
 
 void loop()
 {
-    digitalWrite(STBY, 1);
-    uint16_t position = Line();
-    regulator.input = position;
-    int out = regulator.getResultTimer();
-    ml(constrain(motor_sp - out, -255, 255));
-    mr(constrain(motor_sp + out, -255, 255));
-
 
 }
