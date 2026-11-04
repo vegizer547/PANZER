@@ -5,14 +5,14 @@ void ml(int s)
     if (s > 0)
     {
         setDir(0, 0);
-        digitalWrite(PWMA, s);
+        analogWrite(PWMA, s);
         digitalWrite(AIN1, 1);
         digitalWrite(AIN2, 0);
     }
     else
     {
         setDir(0, 1);
-        digitalWrite(PWMA, -s);
+        analogWrite(PWMA, -s);
         digitalWrite(AIN1, 0);
         digitalWrite(AIN2, 1);
     }
@@ -22,20 +22,20 @@ void mr(int s)
     if (s > 0)
     {
         setDir(1, 0);
-        digitalWrite(PWMB, s);
+        analogWrite(PWMB, s);
         digitalWrite(BIN1, 1);
         digitalWrite(BIN2, 0);
     }
     else
     {
         setDir(1, 1);
-        digitalWrite(PWMB, -s);
+        analogWrite(PWMB, -s);
         digitalWrite(BIN1, 0);
         digitalWrite(BIN2, 1);
     }
 }
 
-void foraward(uint64_t r)
+void forward(uint64_t r)
 {
     digitalWrite(STBY, is_drive);
     double start_l = getRasst(0);
@@ -44,7 +44,9 @@ void foraward(uint64_t r)
     double traveled_l = 0;
     double traveled_r = 0;
 
-    motors.setpoint = 0;
+    motors.setpoint = -2;
+
+    motors.setLimits(-20, 20);
 
     while(r > (traveled_l + traveled_r) /2)
     {
@@ -59,6 +61,8 @@ void foraward(uint64_t r)
         ml(constrain((motor_sp - out), 0, 255));
         mr(constrain((motor_sp + out), 0, 255));
     }
+    ml(0);
+    mr(0);
 }
 
 void backward(uint64_t r)
@@ -70,7 +74,9 @@ void backward(uint64_t r)
     double traveled_l = 0;
     double traveled_r = 0;
 
-    motors.setpoint = 0;
+    motors.setpoint = 2;
+
+    motors.setLimits(-20, 20);
 
     while(r > (traveled_l + traveled_r) /2)
     {
@@ -101,6 +107,8 @@ void right(int angle)
     double target = rad * (KOLEYA / 2);
     
     motors.setpoint = target * 2;
+
+    motors.setLimits(-255, 255);
 
     while(true)
     {
@@ -136,6 +144,8 @@ void left(int angle)
     double target = rad * (KOLEYA / 2);
     
     motors.setpoint = target * 2;
+
+    motors.setLimits(-255, 255);
 
     while(true)
     {

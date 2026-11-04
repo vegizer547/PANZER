@@ -1,4 +1,5 @@
 #include "line.h"
+#include "../motors/motors.h"
 
 static line_data line[8];
 
@@ -16,6 +17,7 @@ void ManualCalib()
 {
     for (int n = 0; n < 100000; n++)
     {
+        ReadRawLine();
         for (int i = 0; i < 8; i++)
         {
             if (line[i].raw > line[i].max)
@@ -38,8 +40,10 @@ void ReadCalibratedValue()
     {
         line[i].calib = map(line[i].raw, line[i].min, line[i].max, 0, 1000);
         line[i].calib = constrain(line[i].calib, 0, 1000);
-        if (line[i].calib >= 600) line[i].state = 1;
-        else line[i].state = 0;
+        if (line[i].calib >= 600)
+            line[i].state = 1;
+        else
+            line[i].state = 0;
     }
 }
 
@@ -53,12 +57,12 @@ uint16_t GetLinePos()
 
     for (uint8_t i = 0; i < 4; i++)
     {
-        uint16_t value = line[i+2].calib;
+        uint16_t value = line[i + 2].calib;
         if (value > 800)
             onLine = true;
         if (value > 400)
         {
-            avg += (uint32_t)value * ((i+1) * 1000);
+            avg += (uint32_t)value * ((i + 1) * 1000);
             sum += value;
         }
     }
@@ -76,8 +80,9 @@ void goLine()
     int out = regulator.getResultTimer();
     ml(constrain(motor_sp - out, -255, 255));
     mr(constrain(motor_sp + out, -255, 255));
-    if (line[1].state == 1 || line[6].state == 1)
+    if (line[0].state == 1 || line[7].state == 1)
     {
-        //опросить датчики цвета
+        //ColorHandler();
+        forward(30);
     }
 }

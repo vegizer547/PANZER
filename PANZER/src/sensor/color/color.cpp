@@ -78,3 +78,13 @@ void sfsdfsdfsdfsdfsdf(int r, int g, int b) {
   }
   return (0);
 }*/
+
+void ColorHandler()
+{
+  Serial.println("Цвет");
+
+  if (color_sensor.left.curr_color == 2 || color_sensor.left.curr_color == 2)
+    while (true)
+      delay(1);
+    
+}

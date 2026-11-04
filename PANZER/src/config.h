@@ -25,9 +25,8 @@
 
 #define KOLEYA 105
 
-
 //                              диаметр  кол.прорезей
-const float DIST_PER_TICK = (PI * 55.3) / (24. * 2.); 
+const float DIST_PER_TICK = (PI * 55.5) / (26. * 2.); 
 
 inline bool is_drive = 1;
 

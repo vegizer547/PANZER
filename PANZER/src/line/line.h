@@ -1,6 +1,7 @@
 #pragma once
 #include "../config.h"
 #include "../motors/motors.h"
+#include "../sensor/color/color.h"
 
 struct line_data {
     int raw;
@@ -15,3 +16,4 @@ void CalibrateLine();
 void ManualCalib();
 void AutoCalib();
 uint16_t GetLinePos();
+void goLine();

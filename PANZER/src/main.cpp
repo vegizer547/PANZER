@@ -29,20 +29,35 @@ void setup()
   pinMode(BUZ, OUTPUT);
   pinMode(BUT, INPUT_PULLUP);
 
-  regulator.setDirection(REVERSE);
+  regulator.setDirection(NORMAL);
   regulator.setLimits(-255, 255);
   regulator.setpoint = 2500;
 
-  motors.setDirection(NORMAL);
+  motors.setDirection(REVERSE);
   motors.setLimits(-255, 255);
   
   attachInterrupt(digitalPinToInterrupt(ENC_PIN0), l_InterruptHandler, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENC_PIN1), r_InterruptHandler, CHANGE);
+  digitalWrite(BUZ, 1);
+  delay(50);
+  digitalWrite(BUZ, 0);
+  //ManualCalib();
+  digitalWrite(BUZ, 1);
+  delay(50);
+  digitalWrite(BUZ, 0);
+  delay(500);
 
-
+  forward(400);
+  //delay(1000);
+  //ml(0);
+  //mr(0);
+  //left(90);
+  //right(90);
+  //backward(50);
+  //Serial.print(motor_sp);
 }
 
 void loop()
 {
-
+  //Serial.println(motor_sp);
 }

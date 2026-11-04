@@ -10,3 +10,4 @@ struct col_sens {
 };
 
 void readColor(); // 0 - левый; 1 - правый
+void ColorHandler();
