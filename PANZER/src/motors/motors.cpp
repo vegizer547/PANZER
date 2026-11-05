@@ -74,7 +74,7 @@ void backward(uint64_t r)
     double traveled_l = 0;
     double traveled_r = 0;
 
-    motors.setpoint = 2;
+    motors.setpoint = -2;
 
     motors.setLimits(-20, 20);
 
@@ -91,6 +91,8 @@ void backward(uint64_t r)
         ml(-1 * constrain((motor_sp - out), 0, 255));
         mr(-1 * constrain((motor_sp + out), 0, 255));
     }
+    ml(0);
+    mr(0);
 }
 
 void right(int angle)
@@ -106,14 +108,14 @@ void right(int angle)
 
     double target = rad * (KOLEYA / 2);
     
-    motors.setpoint = target * 2;
+    motors.setpoint = 0;
 
     motors.setLimits(-255, 255);
 
     while(true)
     {
         traveled_l = getRasst(0) - start_l;
-        traveled_r = getRasst(1) - start_r;
+        traveled_r = start_r - getRasst(1);
 
         double err = traveled_l - traveled_r;
         motors.input = err;
@@ -143,13 +145,13 @@ void left(int angle)
 
     double target = rad * (KOLEYA / 2);
     
-    motors.setpoint = target * 2;
+    motors.setpoint = 0;
 
     motors.setLimits(-255, 255);
 
     while(true)
     {
-        traveled_l = getRasst(0) - start_l;
+        traveled_l = start_l - getRasst(0);
         traveled_r = getRasst(1) - start_r;
 
         double err = traveled_l - traveled_r;
