@@ -1,3 +1,4 @@
+#pragma once
 #include "../config.h"
 #include "../sensor/encoders/encoders.h"
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "../../config.h"
 
 int64_t getEncDist(bool mtr); // 0 - левый; 1 - правый  
