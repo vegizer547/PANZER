@@ -104,7 +104,7 @@ void right(int angle)
     double traveled_l = 0;
     double traveled_r = 0;
 
-    double rad = (double)angle / 57.2958;
+    double rad = (double)angle * DEG_TO_RAD;
 
     double target = rad * (KOLEYA / 2);
     
@@ -112,21 +112,18 @@ void right(int angle)
 
     motors.setLimits(-255, 255);
 
-    while(true)
+    while(target > (traveled_l + traveled_r) /2)
     {
         traveled_l = getRasst(0) - start_l;
-        traveled_r = start_r - getRasst(1);
+        traveled_r = getRasst(1) - start_r;
 
         double err = traveled_l - traveled_r;
         motors.input = err;
 
         double out = motors.getResultTimer();
 
-        ml(constrain((motor_sp - out), 0, 255));
-        mr(-1* constrain((motor_sp + out), 0, 255));
-
-        if (abs(traveled_l) >= target || abs(traveled_r) >= target)
-            break;
+        ml(-1* constrain((motor_sp - out), -255, 255));
+        mr(constrain((motor_sp + out), -255, 255));
     }
     ml(0);
     mr(0);
@@ -141,7 +138,7 @@ void left(int angle)
     double traveled_l = 0;
     double traveled_r = 0;
 
-    double rad = (double)angle / 57.2958;
+    double rad = (double)angle * DEG_TO_RAD;
 
     double target = rad * (KOLEYA / 2);
     
@@ -149,9 +146,9 @@ void left(int angle)
 
     motors.setLimits(-255, 255);
 
-    while(true)
+    while(target > (traveled_l + traveled_r) /2)
     {
-        traveled_l = start_l - getRasst(0);
+        traveled_l = getRasst(0) - start_l;
         traveled_r = getRasst(1) - start_r;
 
         double err = traveled_l - traveled_r;
@@ -159,11 +156,8 @@ void left(int angle)
 
         double out = motors.getResultTimer();
 
-        ml(-1* constrain((motor_sp - out), 0, 255));
-        mr(constrain((motor_sp + out), 0, 255));
-
-        if (abs(traveled_l) >= target || abs(traveled_r) >= target)
-            break;
+        ml(constrain((motor_sp - out), 0, 255));
+        mr(-1* constrain((motor_sp + out), 0, 255));
     }
     ml(0);
     mr(0);

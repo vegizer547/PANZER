@@ -1,4 +1,6 @@
 #include "color.h"
+#include "../../motors/motors.h"
+#include "../../dop_dunc/buz.h"
 
 static col_sens color_sensor;
 
@@ -84,7 +86,7 @@ void ColorHandler()
   Serial.println("Цвет");
   readColor();
 
-  if (color_sensor.left.curr_color == 2 || color_sensor.left.curr_color == 2) {
+  if (color_sensor.left.curr_color == 2 || color_sensor.right.curr_color == 2) {
     for (int i = 0; i < 4; i++) {
         buz_pic(30);
         delay(970);
@@ -93,14 +95,14 @@ void ColorHandler()
     while (true) {}
   }
 
-  if (color_sensor.left.curr_color == 1 || color_sensor.left.curr_color == 1)
+  if (color_sensor.left.curr_color == 1 && color_sensor.right.curr_color == 1)
     left(180);
-  if (color_sensor.left.curr_color == 1 && color_sensor.left.curr_color == 0)
+  if (color_sensor.left.curr_color == 1 && color_sensor.right.curr_color == 0)
   {
     forward(40);
     left(90);
   }
-  if (color_sensor.left.curr_color == 0 && color_sensor.left.curr_color == 1)
+  if (color_sensor.left.curr_color == 0 && color_sensor.right.curr_color == 1)
   {
     forward(40);
     right(90);

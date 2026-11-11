@@ -25,8 +25,7 @@ void setDir(bool mtr, bool dir)
 
 void setEncDist(bool mtr)
 {
-    if (!mtr) (!dir_l) ? l_enc++ : l_enc--;
-    else (!dir_r) ? r_enc++ : r_enc--;
+    (!mtr) ? l_enc++ : r_enc++;
 }
 
 void __time_critical_func(r_InterruptHandler())

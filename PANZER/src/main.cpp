@@ -41,20 +41,21 @@ void setup()
   digitalWrite(BUZ, 1);
   delay(50);
   digitalWrite(BUZ, 0);
-  //ManualCalib();
+  ManualCalib();
   digitalWrite(BUZ, 1);
   delay(50);
   digitalWrite(BUZ, 0);
   delay(500);
 
-  forward(400);
+  goLine();
+
+  //forward(400);
   //delay(1000);
   //ml(0);
   //mr(0);
   //left(90);
   //right(90);
   //backward(50);
-  //Serial.print(motor_sp);
 }
 
 void loop()

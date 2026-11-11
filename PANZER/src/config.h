@@ -36,7 +36,7 @@ inline GyverPID motors(5, 0, 0.2, 10);
 inline Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_2_4MS, TCS34725_GAIN_4X);
 inline Adafruit_TCS34725 tcs2 = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_2_4MS, TCS34725_GAIN_4X);
 
-inline int speed = 26; //Скорость в процентах
+inline int speed = 30; //Скорость в процентах
 inline int motor_sp = map(speed, 0, 100, 0, 255); // при sp = 26: msp = 66
 
 
